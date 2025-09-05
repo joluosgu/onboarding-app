@@ -1,13 +1,25 @@
 
-name: flutter_supabase_onboarding
-version: 1.0.0
+name: flutter_onboarding_app
+version: 1.0.0+1
+description: App de onboarding con Supabase
+
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  supabase_flutter: ^1.10.0
+  supabase_flutter: ^1.4.0
+  flutter_riverpod: ^2.0.0
+  http: ^0.13.4
+  intl: ^0.17.0
+  flutter_hooks: ^0.18.5
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true

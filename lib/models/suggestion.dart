@@ -1,0 +1,1 @@
+class Suggestion { int id; String userEmail; String message; DateTime createdAt; Suggestion({required this.id, required this.userEmail, required this.message, required this.createdAt}); }
