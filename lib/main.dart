@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'services/supabase_config.dart';
 import 'pages/login_page.dart';
+import 'pages/register_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       title: 'Onboarding App',
       theme: ThemeData(primarySwatch: Colors.blue),
       home: const LoginPage(),
+      routes: {
+        '/register': (_) => const RegisterPage(),
+      },
     );
   }
 }

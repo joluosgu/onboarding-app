@@ -37,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
             TextField(controller: passwordController, decoration: const InputDecoration(labelText: 'Contraseña'), obscureText: true),
             const SizedBox(height: 20),
             ElevatedButton(onPressed: login, child: const Text('Entrar')),
+            TextButton(onPressed: () => Navigator.pushNamed(context, '/register'), child: const Text('Crear cuenta')),
           ],
         ),
       ),
