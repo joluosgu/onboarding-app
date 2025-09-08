@@ -15,13 +15,17 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() async {
     final email = emailController.text;
     final password = passwordController.text;
-    final success = await supabase.signIn(email, password);
-    if (success) {
+    final userId = await supabase.signIn(email, password);
+    if (userId != null) {
       if (email == 'jlospina') {
         Navigator.pushNamed(context, '/admin');
       } else {
         Navigator.pushNamed(context, '/tasks');
       }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Credenciales inválidas')),
+      );
     }
   }
 

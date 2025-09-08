@@ -5,6 +5,16 @@ class SupabaseService {
   final client = Supabase.instance.client;
 
   Future<bool> signUp(String email, String password) async {
+    final existingUser = await client
+        .from('users')
+        .select()
+        .eq('email', email)
+        .maybeSingle();
+
+    if (existingUser != null) {
+      return false;
+    }
+
     final response = await client.from('users').insert({
       'email': email,
       'password': password,
@@ -12,13 +22,17 @@ class SupabaseService {
     return response != null;
   }
 
-  Future<bool> signIn(String email, String password) async {
+  Future<int?> signIn(String email, String password) async {
     final response = await client
         .from('users')
         .select()
         .eq('email', email)
         .eq('password', password)
         .maybeSingle();
-    return response != null;
+
+    if (response != null && response['id'] != null) {
+      return response['id'] as int;
+    }
+    return null;
   }
 }

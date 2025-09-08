@@ -15,8 +15,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void register() async {
     final email = emailController.text;
     final password = passwordController.text;
-    await supabase.signUp(email, password);
-    Navigator.pop(context);
+    final success = await supabase.signUp(email, password);
+    if (success) {
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('El usuario ya existe')),
+      );
+    }
   }
 
   @override
