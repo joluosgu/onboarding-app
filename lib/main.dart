@@ -8,12 +8,10 @@ import 'screens/user_tasks_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Supabase.initialize(
     url: 'https://TU-PROYECTO.supabase.co',
     anonKey: 'TU-CLAVE-ANONIMA',
   );
-
   runApp(MyApp());
 }
 
