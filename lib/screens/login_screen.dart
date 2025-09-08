@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (email == 'jlospina') {
         Navigator.pushNamed(context, '/admin');
       } else {
-        Navigator.pushNamed(context, '/tasks');
+        Navigator.pushNamed(context, '/tasks', arguments: userId);
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
