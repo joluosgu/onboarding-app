@@ -36,19 +36,3 @@ class SupabaseService {
     return null;
   }
 }
-
-
-  Future<List<Map<String, dynamic>>> obtenerTareas(int userId) async {
-    final response = await client
-        .from('tareas')
-        .select()
-        .eq('usuario_id', userId);
-    return List<Map<String, dynamic>>.from(response);
-  }
-
-  Future<void> marcarTareaCompletada(int tareaId) async {
-    await client
-        .from('tareas')
-        .update({'completada': true})
-        .eq('id', tareaId);
-  }
