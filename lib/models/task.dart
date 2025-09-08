@@ -1,1 +1,0 @@
-class Task { int id; int userId; String title; String description; String link; bool completed; Task({required this.id, required this.userId, required this.title, required this.description, required this.link, required this.completed}); }

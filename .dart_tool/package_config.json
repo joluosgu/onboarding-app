@@ -75,15 +75,15 @@
     },
     {
       "name": "flutter_hooks",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/flutter_hooks-0.18.6",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/flutter_hooks-0.21.2",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/flutter_lints-5.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.5"
     },
     {
       "name": "flutter_riverpod",
@@ -105,15 +105,15 @@
     },
     {
       "name": "functions_client",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/functions_client-1.3.2",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/functions_client-2.4.4",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "gotrue",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/gotrue-1.12.6",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/gotrue-2.14.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.3"
     },
     {
       "name": "gtk",
@@ -122,22 +122,10 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "hive",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/hive-2.2.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "hive_flutter",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/hive_flutter-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "http",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/http-0.13.6",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/http-1.5.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.4"
     },
     {
       "name": "http_parser",
@@ -147,15 +135,9 @@
     },
     {
       "name": "intl",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/intl-0.17.0",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/intl-0.20.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "js",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/js-0.6.7",
-      "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.3"
     },
     {
       "name": "jwt_decode",
@@ -183,9 +165,15 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/lints-2.1.1",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/lints-5.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.5"
+    },
+    {
+      "name": "logging",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/logging-1.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
     },
     {
       "name": "matcher",
@@ -267,15 +255,15 @@
     },
     {
       "name": "postgrest",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/postgrest-1.5.2",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/postgrest-2.4.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "realtime_client",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/realtime_client-1.4.0",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/realtime_client-2.5.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "retry",
@@ -338,24 +326,6 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "sign_in_with_apple",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/sign_in_with_apple-5.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "sign_in_with_apple_platform_interface",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/sign_in_with_apple_platform_interface-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.3"
-    },
-    {
-      "name": "sign_in_with_apple_web",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/sign_in_with_apple_web-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "sky_engine",
       "rootUri": "file:///Users/jlospina/Downloads/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -381,9 +351,9 @@
     },
     {
       "name": "storage_client",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/storage_client-1.5.4",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/storage_client-2.4.1",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "stream_channel",
@@ -399,15 +369,15 @@
     },
     {
       "name": "supabase",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/supabase-1.11.11",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/supabase-2.9.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.3"
     },
     {
       "name": "supabase_flutter",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/supabase_flutter-1.10.25",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/supabase_flutter-2.10.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.3"
     },
     {
       "name": "term_glyph",
@@ -500,30 +470,6 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "webview_flutter",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/webview_flutter-4.10.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
-      "name": "webview_flutter_android",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/webview_flutter_android-4.3.2",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
-      "name": "webview_flutter_platform_interface",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/webview_flutter_platform_interface-2.13.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
-      "name": "webview_flutter_wkwebview",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.22.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.5"
-    },
-    {
       "name": "xdg_directories",
       "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/xdg_directories-1.1.0",
       "packageUri": "lib/",
@@ -531,9 +477,9 @@
     },
     {
       "name": "yet_another_json_isolate",
-      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/yet_another_json_isolate-1.1.1",
+      "rootUri": "file:///Users/jlospina/.pub-cache/hosted/pub.dev/yet_another_json_isolate-2.1.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "flutter_onboarding_app",
@@ -542,7 +488,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2025-09-05T21:51:29.363525Z",
+  "generated": "2025-09-08T14:26:45.313996Z",
   "generator": "pub",
   "generatorVersion": "3.5.0",
   "flutterRoot": "file:///Users/jlospina/Downloads/flutter",

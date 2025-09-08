@@ -1,11 +1,19 @@
 
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/admin_dashboard.dart';
 import 'screens/user_tasks_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://TU-PROYECTO.supabase.co',
+    anonKey: 'TU-CLAVE-ANONIMA',
+  );
+
   runApp(MyApp());
 }
 
