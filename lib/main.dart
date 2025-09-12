@@ -1,5 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_onboarding_app/screens/admin_report.dart';
+import 'package:flutter_onboarding_app/screens/admin_suggestions.dart';
+import 'package:flutter_onboarding_app/screens/admin_tasks.dart';
+import 'package:flutter_onboarding_app/screens/admin_tasks_create.dart';
+import 'package:flutter_onboarding_app/screens/user_suggestions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
@@ -28,7 +33,14 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
         '/admin': (context) => AdminDashboard(),
+        '/admintask': (context) => Admintasks(),
+        '/admintaskcreate': (context) => AdminTasksCreate(),
+        '/adminreport': (context) => AdminReport(), 
         '/tasks': (context) => UserTasksScreen(),
+        '/usersuggestions': (context) => UserSuggestions(),
+                '/adminsuggestions': (context) => AdminSuggestions(),
+
+
       },
     );
   }
