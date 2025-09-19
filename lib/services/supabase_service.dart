@@ -35,19 +35,16 @@ class SupabaseService {
       .select('*')
       .eq('role', role); // o 'role' si así se llama
 
-  // Crear entradas en tasks_by_user
-  print("tareas cargadas");
-
   final clientid = await client
       .from('users')
       .select('id')
       .eq('email', email)
       .maybeSingle();
 
-
 // Crear entradas en tasks_by_user
   final tareasAsignadas = tareas.map((tarea) => {
     'user_id': clientid['id'],
+    'task_id': tarea['id'], // <-- Agrega el id de la tarea
     'title': tarea['title'],
     'description': tarea['description'],
     'link': tarea['link'],
@@ -224,4 +221,66 @@ if (response.status != 200)  {
     }
   }
 
+  Future<List<String>> obtenerRoles() async {
+  final response = await client
+  .from('role')
+  .select('role');
+  return 
+  (response as List).map((r) => r['role'] as String).toList();
+}
+
+Future<void> crearRole(String role) async {
+  await client.from('role').insert({'role': role});
+}
+
+Future<void> eliminarRole(String role) async {
+  await client.from('role').delete().eq('role', role);
+}
+
+Future<Map<String, double>> obtenerPorcentajePorEmailPorRole(String role) async {
+  // Trae todas las tareas asignadas a usuarios, incluyendo el id de la tarea y el usuario
+  final response = await client
+      .from('tasks_by_user')
+      .select('completed, users(email), task_id');
+
+  final tareasByUser = List<Map<String, dynamic>>.from(response);
+
+  // Trae todas las tareas con su id y rol
+  final tareas = await client
+      .from('tasks')
+      .select('id, role');
+
+  final tareasList = List<Map<String, dynamic>>.from(tareas);
+
+  // Crea un mapa de id de tarea a rol
+  final Map<int, String> tareaIdARol = {
+    for (var tarea in tareasList) tarea['id'] as int: tarea['role'] as String
+  };
+
+  final Map<String, int> totalPorEmail = {};
+  final Map<String, int> completadasPorEmail = {};
+
+  for (var tareaUser in tareasByUser) {
+    final email = tareaUser['users']?['email'] ?? 'Desconocido';
+    final completada = tareaUser['completed'] == true;
+    final taskId = tareaUser['task_id'];
+    final tareaRole = tareaIdARol[taskId];
+
+    if (tareaRole == role) {
+      totalPorEmail[email] = (totalPorEmail[email] ?? 0) + 1;
+      if (completada) {
+        completadasPorEmail[email] = (completadasPorEmail[email] ?? 0) + 1;
+      }
+    }
+  }
+
+  final Map<String, double> porcentajePorEmail = {};
+  totalPorEmail.forEach((email, total) {
+    final completadas = completadasPorEmail[email] ?? 0;
+    final porcentaje = total > 0 ? (completadas / total) * 100 : 0;
+    porcentajePorEmail[email] = double.parse(porcentaje.toStringAsFixed(2));
+  });
+
+  return porcentajePorEmail;
+}
 }

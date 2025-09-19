@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/supabase_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserTasksScreen extends StatefulWidget {
   @override
@@ -40,17 +41,12 @@ class _UserTasksScreenState extends State<UserTasksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0), // Fondo gris claro
+      backgroundColor: Color(0xFFE0E0E0), // Gris muy claro
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 23, 106, 173), // Color de fondo azul oscuro
-          ),
-        ),
+        backgroundColor: Color(0xFF333333), // Gris oscuro
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center, // Centra los elementos horizontalmente
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Título principal de la AppBar
             Text(
               'Tareas Onboarding Galatea',
               style: TextStyle(
@@ -59,16 +55,15 @@ class _UserTasksScreenState extends State<UserTasksScreen> {
                 color: Colors.white,
               ),
             ),
-            SizedBox(width: 16), // Espacio entre los dos textos
-            // Enlace para sugerencias
+            SizedBox(width: 16),
             GestureDetector(
               onTap: () {
-                 Navigator.pushNamed(context, '/usersuggestions', arguments: userId);
+                Navigator.pushNamed(context, '/usersuggestions', arguments: userId);
               },
               child: Text(
                 'Sugerencias',
                 style: TextStyle(
-                  color: Color(0xFFffcd00),
+                  color: Color(0xFFB0B0B0), // Gris medio
                   fontSize: 16,
                   decoration: TextDecoration.underline,
                 ),
@@ -85,6 +80,7 @@ class _UserTasksScreenState extends State<UserTasksScreen> {
             margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             elevation: 3,
+            color: Colors.white, // Fondo blanco para la tarjeta
             child: Padding(
               padding: EdgeInsets.all(16),
               child: Column(
@@ -98,29 +94,43 @@ class _UserTasksScreenState extends State<UserTasksScreen> {
                           'Tarea: ${tarea['title'] ?? ''}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 6, 44, 74), // Azul oscuro
+                            color: Color(0xFF333333), // Gris oscuro
                             fontSize: 16,
                           ),
                         ),
                       ),
                       tarea['completed'] == true
-                ? Icon(Icons.check_circle, color: Colors.green)
-                : IconButton(
-                    icon: Icon(Icons.check_box_outline_blank, color: Color(0xFFffcd00)),
-                    onPressed: () => marcarComoCompletada(tarea['id']),
-                  ),
+                        ? Icon(Icons.check_circle, color: Colors.green)
+                        : IconButton(
+                            icon: Icon(Icons.check_box_outline_blank, color: Color(0xFFB0B0B0)), // Gris medio
+                            onPressed: () => marcarComoCompletada(tarea['id']),
+                          ),
                     ],
                   ),
                   SizedBox(height: 8),
                   Text(
                     'Descripción: ${tarea['description'] ?? ''}',
-                    style: TextStyle(color: Colors.black87),
+                    style: TextStyle(color: Color(0xFF333333)), // Gris oscuro
                   ),
                   SizedBox(height: 8),
-                  Text(
-                    'Rol: ${tarea['role'] ?? ''}',
-                    style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black54),
-                  ),
+                  tarea['link'] != null && tarea['link'].toString().isNotEmpty
+                    ? InkWell(
+                        onTap: () async {
+                          final url = tarea['link'].toString();
+                          if (await canLaunchUrl(Uri.parse(url))) {
+                            await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+                          }
+                        },
+                        child: Text(
+                          'Link',
+                          style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Color(0xFF333333), // Gris oscuro
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      )
+                    : SizedBox.shrink(),
                 ],
               ),
             ),

@@ -72,13 +72,9 @@ class _AdminSuggestionsState extends State<AdminSuggestions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0),
+      backgroundColor: Color(0xFFE0E0E0), // Gris muy claro
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFF003057),
-          ),
-        ),
+        backgroundColor: Color(0xFF333333), // Gris oscuro
         title: Text(
           'Administrar Sugerencias',
           style: TextStyle(
@@ -97,6 +93,7 @@ class _AdminSuggestionsState extends State<AdminSuggestions> {
               borderRadius: BorderRadius.circular(12),
             ),
             elevation: 3,
+            color: Colors.white, // Fondo blanco para la tarjeta
             child: Padding(
               padding: EdgeInsets.all(12),
               child: Column(
@@ -110,7 +107,7 @@ class _AdminSuggestionsState extends State<AdminSuggestions> {
                           'Sugerencia: ${sugerencia['name'] ?? ''}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF003057),
+                            color: Color(0xFF333333), // Gris oscuro
                           ),
                         ),
                       ),
@@ -121,11 +118,20 @@ class _AdminSuggestionsState extends State<AdminSuggestions> {
                     ],
                   ),
                   SizedBox(height: 8),
-                  Text('Descripción: ${sugerencia['description'] ?? ''}'),
+                  Text(
+                    'Descripción: ${sugerencia['description'] ?? ''}',
+                    style: TextStyle(color: Color(0xFF333333)), // Gris oscuro
+                  ),
                   SizedBox(height: 4),
-                  Text('Rol: ${sugerencia['role'] ?? ''}'),
+                  Text(
+                    'Rol: ${sugerencia['role'] ?? ''}',
+                    style: TextStyle(color: Color(0xFFB0B0B0)), // Gris medio
+                  ),
                   SizedBox(height: 4),
-                  Text('Usuario: ${sugerencia['user_id'] ?? ''}'),
+                  Text(
+                    'Usuario: ${sugerencia['user_id'] ?? ''}',
+                    style: TextStyle(color: Color(0xFFB0B0B0)), // Gris medio
+                  ),
                 ],
               ),
             ),

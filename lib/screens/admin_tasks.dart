@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/supabase_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Admintasks extends StatefulWidget {
   @override
@@ -79,13 +80,9 @@ Future<void> cargarTareas() async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0),
+      backgroundColor: Color(0xFFE0E0E0), // Gris muy claro
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFF003057),
-          ),
-        ),
+        backgroundColor: Color(0xFF333333), // Gris oscuro
         title: Text(
           'Administrar Tareas',
           style: TextStyle(
@@ -104,6 +101,7 @@ Future<void> cargarTareas() async {
               borderRadius: BorderRadius.circular(12),
             ),
             elevation: 3,
+            color: Colors.white, // Fondo blanco para la tarjeta
             child: Padding(
               padding: EdgeInsets.all(12),
               child: Column(
@@ -117,7 +115,7 @@ Future<void> cargarTareas() async {
                           'Tarea: ${tarea['title'] ?? ''}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF003057),
+                            color: Color(0xFF333333), // Gris oscuro
                           ),
                         ),
                       ),
@@ -128,9 +126,32 @@ Future<void> cargarTareas() async {
                     ],
                   ),
                   SizedBox(height: 8),
-                  Text('Descripción: ${tarea['description'] ?? ''}'),
+                  Text(
+                    'Descripción: ${tarea['description'] ?? ''}',
+                    style: TextStyle(color: Color(0xFF333333)), // Gris oscuro
+                  ),
                   SizedBox(height: 4),
-                  Text('Role: ${tarea['role'] ?? ''}'),
+                  tarea['link'] != null && tarea['link'].toString().isNotEmpty
+  ? InkWell(
+      onTap: () async {
+        final url = tarea['link'].toString();
+        if (await canLaunchUrl(Uri.parse(url))) {
+          await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+        }
+      },
+      child: Text(
+        tarea['link'],
+        style: TextStyle(
+          color: Colors.blue,
+          decoration: TextDecoration.underline,
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+    )
+  : Text(
+      '',
+      style: TextStyle(color: Color(0xFFB0B0B0)),
+    ),
                 ],
               ),
             ),

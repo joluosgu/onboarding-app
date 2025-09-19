@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_onboarding_app/screens/admin_report.dart';
+import 'package:flutter_onboarding_app/screens/admin_roles.dart';
 import 'package:flutter_onboarding_app/screens/admin_suggestions.dart';
 import 'package:flutter_onboarding_app/screens/admin_tasks.dart';
 import 'package:flutter_onboarding_app/screens/admin_tasks_create.dart';
@@ -35,12 +35,11 @@ class MyApp extends StatelessWidget {
         '/admin': (context) => AdminDashboard(),
         '/admintask': (context) => Admintasks(),
         '/admintaskcreate': (context) => AdminTasksCreate(),
-        '/adminreport': (context) => AdminReport(), 
+        '/adminreport': (context) => AdminReport(),
         '/tasks': (context) => UserTasksScreen(),
         '/usersuggestions': (context) => UserSuggestions(),
-                '/adminsuggestions': (context) => AdminSuggestions(),
-
-
+        '/adminsuggestions': (context) => AdminSuggestions(),
+        '/adminroles': (context) => AdminRolesScreen(), // Agrega esta línea
       },
     );
   }

@@ -11,15 +11,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passwordController = TextEditingController();
   final supabase = SupabaseService();
 
- final List<String> opciones = ['Mobile', 'Web', 'Back'];
+  List<String> opciones = []; // Ahora vacío, se llenará desde la BD
   String? opcionSeleccionada;
 
+  @override
+  void initState() {
+    super.initState();
+    cargarRoles();
+  }
+
+  Future<void> cargarRoles() async {
+    final roles = await supabase.obtenerRoles(); // Debes implementar este método en tu servicio
+    setState(() {
+      opciones = roles;
+      if (opciones.isNotEmpty) {
+        opcionSeleccionada = opciones.first;
+      }
+    });
+  }
 
   void register() async {
     final email = emailController.text;
     final password = passwordController.text;
 
-  print(opcionSeleccionada);
+    print(opcionSeleccionada);
 
     final success = await supabase.signUp(email, password, opcionSeleccionada ?? 'Web');
     if (success) {
@@ -27,21 +42,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('El usuario ya existe')),
-      )
-      ;Navigator.pushNamed(context, '/');
+      );
+      Navigator.pushNamed(context, '/');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0),
+      backgroundColor: Color(0xFFE0E0E0),
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFF003057),
-          ),
-        ),
+        backgroundColor: Color(0xFF333333),
         title: Text(
           'Registro',
           style: TextStyle(
@@ -61,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF003057),
+                color: Color(0xFF333333), // Gris oscuro
               ),
             ),
             SizedBox(height: 24),
@@ -69,8 +80,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
+                prefixIcon: Icon(Icons.email, color: Color(0xFF333333)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -81,8 +94,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               controller: passwordController,
               decoration: InputDecoration(
                 labelText: 'Contraseña',
+                prefixIcon: Icon(Icons.lock, color: Color(0xFF333333)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -93,9 +108,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             DropdownButtonFormField<String>(
               value: opcionSeleccionada,
               decoration: InputDecoration(
-                labelText: 'Selecciona una opción',
+                labelText: 'Selecciona un rol',
+                floatingLabelBehavior: FloatingLabelBehavior.always, // <-- Soluciona la superposición
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -103,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               items: opciones.map((opcion) {
                 return DropdownMenuItem(
                   value: opcion,
-                  child: Text(opcion),
+                  child: Text(opcion, style: TextStyle(color: Color(0xFF333333))),
                 );
               }).toList(),
               onChanged: (valor) {
@@ -127,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFffcd00),
+                backgroundColor: Color(0xFFB0B0B0), // Gris medio
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

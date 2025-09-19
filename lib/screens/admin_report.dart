@@ -13,37 +13,47 @@ class _AdminReportState extends State<AdminReport> {
   final linkController = TextEditingController();
   final roleController = TextEditingController();
 
-   final List<String> opciones = ['Mobile', 'Web', 'Back'];
+  List<String> opciones = [];
   String? opcionSeleccionada;
-
   List<Map<String, dynamic>> resumen = [];
 
-@override
-void initState() {
-  super.initState();
-  cargarResumen();
-}
+  @override
+  void initState() {
+    super.initState();
+    cargarRoles();
+  }
 
-void cargarResumen() async {
-  final porcentajes = await supabase.obtenerPorcentajePorEmail();
-  setState(() {
-    resumen = porcentajes.entries.map((entry) => {
-      'email': entry.key,
-      'porcentaje': entry.value,
-    }).toList();
-  });
-}
+  Future<void> cargarRoles() async {
+    final roles = await supabase.obtenerRoles(); // Debe retornar List<String>
+    setState(() {
+      opciones = roles;
+      if (opciones.isNotEmpty) {
+        opcionSeleccionada = opciones.first;
+        cargarResumen(); // Cargar el resumen del primer rol
+      }
+    });
+  }
+
+  void cargarResumen() async {
+    if (opcionSeleccionada == null) return;
+    final porcentajes = await supabase.obtenerPorcentajePorEmailPorRole(opcionSeleccionada!);
+    setState(() {
+      resumen = porcentajes.entries
+          .map((entry) => {
+                'email': entry.key,
+                'porcentaje': entry.value,
+              })
+          .toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0), // Fondo gris claro
+      backgroundColor: Color(0xFFE0E0E0),
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFF003057), // Color de fondo azul oscuro
-          ),
-        ),
+        backgroundColor: Color(0xFF333333),
+        elevation: 2,
         title: Text(
           'Reporte de Avances',
           style: TextStyle(
@@ -51,29 +61,57 @@ void cargarResumen() async {
             fontWeight: FontWeight.bold,
           ),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               'Avance por usuario',
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF003057),
+                color: Color(0xFF333333),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 16),
+            DropdownButtonFormField<String>(
+              value: opcionSeleccionada,
+              decoration: InputDecoration(
+                labelText: 'Filtrar por rol',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
+                ),
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              items: opciones.map((opcion) {
+                return DropdownMenuItem(
+                  value: opcion,
+                  child: Text(opcion, style: TextStyle(color: Color(0xFF333333))),
+                );
+              }).toList(),
+              onChanged: (valor) {
+                setState(() {
+                  opcionSeleccionada = valor;
+                });
+                cargarResumen();
+              },
+            ),
+            SizedBox(height: 24),
             ...resumen.map((usuario) {
               return Card(
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 2),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(14),
                 ),
                 elevation: 3,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -84,7 +122,7 @@ void cargarResumen() async {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
-                          color: Color(0xFF003057),
+                          color: Color(0xFF333333),
                         ),
                       ),
                       SizedBox(height: 8),
@@ -93,8 +131,9 @@ void cargarResumen() async {
                           Expanded(
                             child: LinearProgressIndicator(
                               value: (usuario['porcentaje'] ?? 0) / 100,
-                              backgroundColor: Colors.grey[300],
-                              color: Color(0xFFffcd00), // Amarillo vibrante
+                              backgroundColor: Color(0xFFE0E0E0),
+                              color: Color(0xFFB0B0B0),
+                              minHeight: 8,
                             ),
                           ),
                           SizedBox(width: 10),
@@ -103,7 +142,7 @@ void cargarResumen() async {
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black54,
+                              color: Color(0xFF333333),
                             ),
                           ),
                         ],
