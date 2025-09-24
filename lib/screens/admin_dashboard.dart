@@ -35,12 +35,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Panel de Administrador'),
+        title: const Text('Panel de Administrador'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         children: [
-          Text(
+          const Text(
             'Acciones rápidas',
             style: TextStyle(
               fontSize: 22,
@@ -49,11 +49,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
             ),
             textAlign: TextAlign.left,
           ),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           GridView.count(
             crossAxisCount: 3,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 4,
             crossAxisSpacing: 4,
             childAspectRatio: 2.2,
@@ -108,9 +108,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
               
             ],
           ),
-          SizedBox(height: 32),
-          Divider(color: Color(0xFFB0B0B0)),
-          SizedBox(height: 16),
+          const SizedBox(height: 32),
+          const Divider(color: Color(0xFFB0B0B0)),
+          const SizedBox(height: 16),
         ],
       ),
       bottomNavigationBar: Padding(
@@ -122,19 +122,19 @@ class _AdminDashboardState extends State<AdminDashboard> {
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
               },
-              child: Text(
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                backgroundColor: const Color(0xFFB0B0B0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: const Text(
                 'Salir',
                 style: TextStyle(
                   color: Color(0xFF333333),
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                ),
-              ),
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-                backgroundColor: Color(0xFFB0B0B0),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
                 ),
               ),
             ),
@@ -160,11 +160,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 18, color: Color(0xFF333333)), // Ícono más pequeño
-              SizedBox(height: 4),
+              Icon(icon, size: 18, color: const Color(0xFF333333)), // Ícono más pequeño
+              const SizedBox(height: 4),
               Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF333333),
