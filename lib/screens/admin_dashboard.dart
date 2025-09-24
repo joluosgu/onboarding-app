@@ -56,7 +56,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
             physics: const NeverScrollableScrollPhysics(),
             mainAxisSpacing: 4,
             crossAxisSpacing: 4,
-            childAspectRatio: 2.2,
+            childAspectRatio: 3.2,
             children: [
               _buildAdminCard(
                 icon: Icons.add_circle_outline,
