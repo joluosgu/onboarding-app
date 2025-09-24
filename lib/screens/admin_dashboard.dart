@@ -85,7 +85,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               ),
               _buildAdminCard(
                 icon: Icons.assignment_turned_in,
-                label: 'Resultados evaluación',
+                label: 'Resultados evaluación.',
                 onTap: () => redirectTo('/admin_exam_results'),
               ),
               
