@@ -12,15 +12,24 @@ class _AdmintasksCreateState extends State<AdminTasksCreate> {
   final descripcionController = TextEditingController();
   final linkController = TextEditingController();
 
-   final List<String> opciones = ['Mobile', 'Web', 'Back'];
+  List<String> opciones = [];
   String? opcionSeleccionada;
 
-  List<Map<String, dynamic>> resumen = [];
+  @override
+  void initState() {
+    super.initState();
+    cargarRoles();
+  }
 
-@override
-void initState() {
-  super.initState();
-}
+  Future<void> cargarRoles() async {
+    final roles = await supabase.obtenerRoles(); // Debe retornar List<String>
+    setState(() {
+      opciones = roles;
+      if (opciones.isNotEmpty) {
+        opcionSeleccionada = opciones.first;
+      }
+    });
+  }
 
   void crearTarea() async {
     final titulo = tituloController.text;
@@ -45,13 +54,9 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0),
+      backgroundColor: Color(0xFFE0E0E0), // Gris muy claro
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFF003057),
-          ),
-        ),
+        backgroundColor: Color(0xFF333333), // Gris oscuro
         title: Text(
           'Administrador',
           style: TextStyle(
@@ -71,7 +76,7 @@ void initState() {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF003057),
+                color: Color(0xFF333333), // Gris oscuro
               ),
             ),
             SizedBox(height: 24),
@@ -79,8 +84,10 @@ void initState() {
               controller: tituloController,
               decoration: InputDecoration(
                 labelText: 'Título',
+                prefixIcon: Icon(Icons.title, color: Color(0xFF333333)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -91,8 +98,10 @@ void initState() {
               controller: descripcionController,
               decoration: InputDecoration(
                 labelText: 'Descripción',
+                prefixIcon: Icon(Icons.description, color: Color(0xFF333333)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -104,8 +113,10 @@ void initState() {
               controller: linkController,
               decoration: InputDecoration(
                 labelText: 'Link',
+                prefixIcon: Icon(Icons.link, color: Color(0xFF333333)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -118,6 +129,7 @@ void initState() {
                 labelText: 'Selecciona un rol',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -125,7 +137,7 @@ void initState() {
               items: opciones.map((opcion) {
                 return DropdownMenuItem(
                   value: opcion,
-                  child: Text(opcion),
+                  child: Text(opcion, style: TextStyle(color: Color(0xFF333333))),
                 );
               }).toList(),
               onChanged: (valor) {
@@ -149,7 +161,7 @@ void initState() {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFffcd00),
+                backgroundColor: Color(0xFFB0B0B0), // Gris medio
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

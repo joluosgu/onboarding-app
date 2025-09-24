@@ -12,12 +12,23 @@ class _UserSuggestionsState extends State<UserSuggestions> {
   final descripcionController = TextEditingController();
   final linkController = TextEditingController();
 
-  final List<String> opciones = ['Mobile', 'Web', 'Back'];
+  List<String> opciones = [];
   String? opcionSeleccionada;
 
   @override
   void initState() {
     super.initState();
+    cargarRoles();
+  }
+
+  Future<void> cargarRoles() async {
+    final roles = await supabase.obtenerRoles(); // Debe retornar List<String>
+    setState(() {
+      opciones = roles;
+      if (opciones.isNotEmpty) {
+        opcionSeleccionada = opciones.first;
+      }
+    });
   }
 
   void crearTarea() async {
@@ -42,13 +53,9 @@ class _UserSuggestionsState extends State<UserSuggestions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0), // Fondo gris claro
+      backgroundColor: Color(0xFFE0E0E0),
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            color: Color(0xFF003057), // Color de fondo azul oscuro
-          ),
-        ),
+        backgroundColor: Color(0xFF333333),
         title: Text(
           'Sugerencias',
           style: TextStyle(
@@ -68,7 +75,7 @@ class _UserSuggestionsState extends State<UserSuggestions> {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF003057),
+                color: Color(0xFF333333), // Gris oscuro
               ),
             ),
             SizedBox(height: 24),
@@ -76,8 +83,10 @@ class _UserSuggestionsState extends State<UserSuggestions> {
               controller: tituloController,
               decoration: InputDecoration(
                 labelText: 'Título de la Sugerencia',
+                prefixIcon: Icon(Icons.title, color: Color(0xFF333333)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -88,8 +97,10 @@ class _UserSuggestionsState extends State<UserSuggestions> {
               controller: descripcionController,
               decoration: InputDecoration(
                 labelText: 'Descripción detallada',
+                prefixIcon: Icon(Icons.description, color: Color(0xFF333333)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -101,8 +112,10 @@ class _UserSuggestionsState extends State<UserSuggestions> {
               controller: linkController,
               decoration: InputDecoration(
                 labelText: 'Link de referencia',
+                prefixIcon: Icon(Icons.link, color: Color(0xFF333333)),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -113,8 +126,10 @@ class _UserSuggestionsState extends State<UserSuggestions> {
               value: opcionSeleccionada,
               decoration: InputDecoration(
                 labelText: 'Selecciona un rol',
+                floatingLabelBehavior: FloatingLabelBehavior.always,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                 ),
                 filled: true,
                 fillColor: Colors.white,
@@ -122,7 +137,7 @@ class _UserSuggestionsState extends State<UserSuggestions> {
               items: opciones.map((opcion) {
                 return DropdownMenuItem(
                   value: opcion,
-                  child: Text(opcion),
+                  child: Text(opcion, style: TextStyle(color: Color(0xFF333333))),
                 );
               }).toList(),
               onChanged: (valor) {
@@ -146,7 +161,7 @@ class _UserSuggestionsState extends State<UserSuggestions> {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFFffcd00), // Amarillo vibrante
+                backgroundColor: Color(0xFFB0B0B0), // Gris medio
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

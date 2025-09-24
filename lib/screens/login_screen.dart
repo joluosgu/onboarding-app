@@ -16,11 +16,18 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = passwordController.text;
     final userId = await supabase.signIn(email, password);
     if (userId != null) {
-      if (email == 'jlospina') {
+      final bool isAdmin = userId['admin'];
+      if (isAdmin == true) {
         Navigator.pushNamed(context, '/admin');
       } else {
-        Navigator.pushNamed(context, '/tasks', arguments: userId);
-        
+        Navigator.pushNamed(
+          context,
+          '/tasks',
+          arguments: {
+            'id': userId['id'],
+            'role': userId['role'],
+          },
+        );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -30,11 +37,18 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    emailController.clear();
+    passwordController.clear();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Color(0xFFE0E0E0), // Fondo gris muy claro
+          color: Color.fromARGB(255, 234, 234, 234), // Gris muy claro en RGB
         ),
         child: Center(
           child: SingleChildScrollView(
@@ -43,21 +57,21 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Logo o icono
-                Icon(
-                  Icons.account_balance,
-                  size: 80,
-                  color: Color(0xFF333333), // Gris oscuro
-                ),
-                SizedBox(height: 16),
+                // Primero el texto "Bienvenido"
                 Text(
-                  'Bienvenido a Galatea',
+                  'Bienvenido a',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF333333), // Gris oscuro
                   ),
+                ),
+                SizedBox(height: 26),
+                // Luego el logo
+                Image.asset(
+                  'assets/images/galatea_logo_gris.png',
+                  height: 100,
                 ),
                 SizedBox(height: 48),
                 // Campo de email
@@ -80,15 +94,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: passwordController,
                   decoration: InputDecoration(
                     labelText: 'Contraseña',
-                    prefixIcon: Icon(Icons.lock, color: Color(0xFF333333)), // Gris oscuro
+                    prefixIcon: Icon(Icons.lock, color: Color(0xFF333333)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide(color: Color(0xFFB0B0B0)), // Gris claro
+                      borderSide: BorderSide(color: Color(0xFFB0B0B0)),
                     ),
                     filled: true,
                     fillColor: Colors.white,
                   ),
                   obscureText: true,
+                  onSubmitted: (_) => login(), // <-- Esta línea permite login con Enter
                 ),
                 SizedBox(height: 32),
                 // Botón de login
