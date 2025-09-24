@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_onboarding_app/screens/admin_questions.dart';
 import 'package:flutter_onboarding_app/screens/admin_report.dart';
 import 'package:flutter_onboarding_app/screens/admin_roles.dart';
 import 'package:flutter_onboarding_app/screens/admin_suggestions.dart';
@@ -10,6 +11,10 @@ import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
 import 'screens/admin_dashboard.dart';
 import 'screens/user_tasks_screen.dart';
+import 'screens/admin_lead.dart';
+import 'screens/user_exam_screen.dart';
+import 'screens/admin_create_question_screen.dart';
+import 'screens/admin_exam_results_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +32,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Onboarding App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        scaffoldBackgroundColor: Color(0xFFE0E0E0),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xFF333333),
+          foregroundColor: Colors.white,
+        ),
+      ),
       initialRoute: '/',
       routes: {
         '/': (context) => LoginScreen(),
@@ -39,7 +51,12 @@ class MyApp extends StatelessWidget {
         '/tasks': (context) => UserTasksScreen(),
         '/usersuggestions': (context) => UserSuggestions(),
         '/adminsuggestions': (context) => AdminSuggestions(),
-        '/adminroles': (context) => AdminRolesScreen(), // Agrega esta línea
+        '/adminroles': (context) => AdminRolesScreen(),
+        '/adminleads': (context) =>  ChangeAdminScreen (),
+        '/user_exam': (context) => UserExamScreen(),
+        '/admin_create_question': (context) => AdminCreateQuestionScreen(),
+        '/admin_exam_results': (context) => AdminExamResultsScreen(),
+        '/admin_questions': (context) => AdminQuestionsScreen(),
       },
     );
   }

@@ -21,9 +21,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future<void> cargarRoles() async {
-    final roles = await supabase.obtenerRoles(); // Debes implementar este método en tu servicio
+    final roles = await supabase.obtenerRoles(); 
+         final rolesFiltrados = roles.where((rol) => rol != 'Todos').toList();
+
     setState(() {
-      opciones = roles;
+      opciones = rolesFiltrados;
       if (opciones.isNotEmpty) {
         opcionSeleccionada = opciones.first;
       }
@@ -34,7 +36,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final email = emailController.text;
     final password = passwordController.text;
 
-    print(opcionSeleccionada);
+    
 
     final success = await supabase.signUp(email, password, opcionSeleccionada ?? 'Web');
     if (success) {

@@ -34,75 +34,84 @@ class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE0E0E0),
       appBar: AppBar(
-        backgroundColor: Color(0xFF333333),
-        elevation: 2,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Panel de Administrador',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
+        title: Text('Panel de Administrador'),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Acciones rápidas',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF333333),
+      body: ListView(
+        padding: EdgeInsets.all(24),
+        children: [
+          Text(
+            'Acciones rápidas',
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF333333),
+            ),
+            textAlign: TextAlign.left,
+          ),
+          SizedBox(height: 24),
+          GridView.count(
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            mainAxisSpacing: 4,
+            crossAxisSpacing: 4,
+            childAspectRatio: 2.2,
+            children: [
+              _buildAdminCard(
+                icon: Icons.add_circle_outline,
+                label: 'Crear tarea',
+                onTap: crearTarea,
               ),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(height: 24),
-            GridView.count(
-              crossAxisCount: 3, // Más columnas para reducir tamaño
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              mainAxisSpacing: 4,
-              crossAxisSpacing: 4,
-              childAspectRatio: 2.2, // Más ancho, menos alto
-              children: [
-                _buildAdminCard(
-                  icon: Icons.add_circle_outline,
-                  label: 'Crear Tarea',
-                  onTap: crearTarea,
-                ),
-                _buildAdminCard(
-                  icon: Icons.list_alt,
-                  label: 'Administrar tareas',
-                  onTap: () => redirectTo('/admintask'),
-                ),
-                _buildAdminCard(
-                  icon: Icons.bar_chart,
-                  label: 'Reporte avances',
-                  onTap: () => redirectTo('/adminreport'),
-                ),
-                _buildAdminCard(
-                  icon: Icons.lightbulb_outline,
-                  label: 'Sugerencias',
-                  onTap: () => redirectTo('/adminsuggestions'),
-                ),
-                _buildAdminCard(
-                  icon: Icons.admin_panel_settings,
-                  label: 'Administrar roles',
-                  onTap: () => redirectTo('/adminroles'),
-                ),
-              ],
-            ),
-            SizedBox(height: 32),
-            Divider(color: Color(0xFFB0B0B0)),
-            SizedBox(height: 16),
-          ],
-        ),
+              _buildAdminCard(
+                icon: Icons.list_alt,
+                label: 'Administrar tareas',
+                onTap: () => redirectTo('/admintask'),
+              ),
+              _buildAdminCard(
+                icon: Icons.bar_chart,
+                label: 'Ver avances onboarding',
+                onTap: () => redirectTo('/adminreport'),
+              ),
+              _buildAdminCard(
+                icon: Icons.add_circle,
+                label: 'Crear pregunta evaluación',
+                onTap: () => redirectTo('/admin_create_question'),
+              ),
+              _buildAdminCard(
+                icon: Icons.quiz,
+                label: 'Administrar preguntas',
+                onTap: () => redirectTo('/admin_questions'),
+              ),
+              _buildAdminCard(
+                icon: Icons.assignment_turned_in,
+                label: 'Resultados evaluación',
+                onTap: () => redirectTo('/admin_exam_results'),
+              ),
+              
+              _buildAdminCard(
+                icon: Icons.lightbulb_outline,
+                label: 'Sugerencias recibidas',
+                onTap: () => redirectTo('/adminsuggestions'),
+              ),
+              _buildAdminCard(
+                icon: Icons.admin_panel_settings,
+                label: 'Administrar perfiles',
+                onTap: () => redirectTo('/adminroles'),
+              ),
+              _buildAdminCard(
+                icon: Icons.accessibility_new,
+                label: 'Administrar líderes',
+                onTap: () => redirectTo('/adminleads'),
+              ),
+              // NUEVAS OPCIONES COMO CARD
+              
+            ],
+          ),
+          SizedBox(height: 32),
+          Divider(color: Color(0xFFB0B0B0)),
+          SizedBox(height: 16),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 16.0),

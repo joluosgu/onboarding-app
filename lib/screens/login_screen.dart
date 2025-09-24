@@ -16,11 +16,18 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = passwordController.text;
     final userId = await supabase.signIn(email, password);
     if (userId != null) {
-      if (email == 'jlospina') {
+      final bool isAdmin = userId['admin'];
+      if (isAdmin == true) {
         Navigator.pushNamed(context, '/admin');
       } else {
-        Navigator.pushNamed(context, '/tasks', arguments: userId);
-        
+        Navigator.pushNamed(
+          context,
+          '/tasks',
+          arguments: {
+            'id': userId['id'],
+            'role': userId['role'],
+          },
+        );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
