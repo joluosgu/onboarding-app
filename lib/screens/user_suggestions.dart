@@ -123,7 +123,7 @@ class _UserSuggestionsState extends State<UserSuggestions> {
             ),
             SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: opcionSeleccionada,
+              initialValue: opcionSeleccionada,
               decoration: InputDecoration(
                 labelText: 'Selecciona un rol',
                 floatingLabelBehavior: FloatingLabelBehavior.always,

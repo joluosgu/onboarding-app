@@ -124,7 +124,7 @@ class _AdmintasksCreateState extends State<AdminTasksCreate> {
             ),
             SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: opcionSeleccionada,
+              initialValue: opcionSeleccionada,
               decoration: InputDecoration(
                 labelText: 'Selecciona un rol',
                 border: OutlineInputBorder(

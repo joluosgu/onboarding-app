@@ -84,7 +84,7 @@ class _AdminExamResultsScreenState extends State<AdminExamResultsScreen> {
               child: Column(
                 children: [
                   DropdownButtonFormField<String>(
-                    value: roleSeleccionado,
+                    initialValue: roleSeleccionado,
                     decoration: InputDecoration(
                       labelText: 'Filtrar por rol',
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),

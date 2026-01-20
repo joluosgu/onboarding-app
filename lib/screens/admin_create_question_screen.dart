@@ -101,7 +101,7 @@ class _AdminCreateQuestionScreenState extends State<AdminCreateQuestionScreen> {
               ),
               SizedBox(height: 16),
               DropdownButtonFormField<String>(
-                value: role,
+                initialValue: role,
                 decoration: InputDecoration(
                   labelText: 'Selecciona un rol',
                   border: OutlineInputBorder(

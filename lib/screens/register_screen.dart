@@ -108,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: opcionSeleccionada,
+              initialValue: opcionSeleccionada,
               decoration: InputDecoration(
                 labelText: 'Selecciona un rol',
                 floatingLabelBehavior: FloatingLabelBehavior.always, // <-- Soluciona la superposición

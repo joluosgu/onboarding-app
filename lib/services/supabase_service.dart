@@ -122,12 +122,7 @@ class SupabaseService {
 
 // Borra una tarea
   Future<void> eliminarTarea(int tareaId) async {
-    final response = await client.from('tasks').delete().eq('id', tareaId).execute();
-
-
-    if (response.status != 204) {
-      throw Exception('Error al eliminar la tarea: ${response.status}');
-    }
+    await client.from('tasks').delete().eq('id', tareaId);
   }
 
   // Marcar tarea como completada
@@ -173,12 +168,7 @@ class SupabaseService {
 
   // Eliminar una sugerencia
   Future<void> eliminarSugerencia(int sugerenciaId) async {
-    final response =
-        await client.from('tasksuggestions').delete().eq('id', sugerenciaId).execute();
-
-    if (response.status != 204) {
-      throw Exception('Error al eliminar la sugerencia: ${response.status}');
-    }
+    await client.from('tasksuggestions').delete().eq('id', sugerenciaId);
   }
 
   Future<List<String>> obtenerRoles() async {
@@ -270,11 +260,9 @@ class SupabaseService {
   // Obtener preguntas y opciones por role
   Future<List<Map<String, dynamic>>> obtenerPreguntasPorRole(String role) async {
     final preguntas = await client
-
         .from('questions')
         .select('*, question_options(*)')
-        .eq('role', role);
-        //imprimo el role
+        .or('role.eq.$role,role.eq.Todos');
 
     return List<Map<String, dynamic>>.from(preguntas);
   }
@@ -325,7 +313,7 @@ class SupabaseService {
   final examenes = await client
       .from('user_exams')
       .select('id, user_id, score, completed_at, users(email, role)')
-      .in_('user_id', userIds)
+      .inFilter('user_id', userIds)
       .order('completed_at', ascending: false);
 
   return List<Map<String, dynamic>>.from(examenes);
@@ -352,9 +340,6 @@ Future<List<Map<String, dynamic>>> obtenerTodasLasPreguntas() async {
 
 // Eliminar una pregunta (y sus opciones asociadas por ON DELETE CASCADE)
 Future<void> eliminarPregunta(int preguntaId) async {
-  final response = await client.from('questions').delete().eq('id', preguntaId).execute();
-  if (response.status != 204) {
-    throw Exception('Error al eliminar la pregunta: ${response.status}');
-  }
+  await client.from('questions').delete().eq('id', preguntaId);
 }
 }

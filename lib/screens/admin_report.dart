@@ -79,7 +79,7 @@ class _AdminReportState extends State<AdminReport> {
             ),
             SizedBox(height: 16),
             DropdownButtonFormField<String>(
-              value: opcionSeleccionada,
+              initialValue: opcionSeleccionada,
               decoration: InputDecoration(
                 labelText: 'Filtrar por rol',
                 floatingLabelBehavior: FloatingLabelBehavior.always,
